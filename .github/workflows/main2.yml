@@ -30,7 +30,7 @@ jobs:
 
     - name: Set Local User Password
       run: |
-        $password = ConvertTo-SecureString -AsPlainText "ADMIN" -Force
+        $password = ConvertTo-SecureString -AsPlainText "ADMIN123456a" -Force
         Set-LocalUser -Name "runneradmin" -Password $password
 
     - name: Create ngrok TCP Tunnel
