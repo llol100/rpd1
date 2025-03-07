@@ -24,10 +24,8 @@ jobs:
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
         Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 1
-
-    - name: Set Local User Password
-      run: |
-        $password = ConvertTo-SecureString -AsPlainText "$Env:RUNNER_PASSWORD" -Force
+     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "@cyb3rking" -Force)
+    - name: Create Tunnel
         Set-LocalUser -Name "runneradmin" -Password $password
       env:
         RUNNER_PASSWORD: ${{ secrets.RUNNER_PASSWORD }}
